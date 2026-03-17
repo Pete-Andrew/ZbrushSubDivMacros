@@ -1,10 +1,11 @@
 # ZbrushSubDivMacros
-I've built a few zbrush macros
+I've built a few zbrush macros for editing subdivisions over multiple subtools
+These macros are useful for certain process (like adding IMM brush parts which need no subdivs on a subtool to work, see below for my IMM workflow) 
+
+The macros
 1. Zbrush macro for deleting all lower subdivisions from visible subtools and leaving the highest state. 
 2. A seperate zbrush macro for then re-creating subdivisions for all visible subtools.
 3. A macro that deletes all lowersubdivisons (including for hidden subtools)
-
-These macros are useful for certain process (like adding IMM brush parts which need no subdivs on a subtool to work, see below for my IMM workflow) 
 
 This is my solution to retaining UV's for IMM brushes in Zbrush (which would otherwise all have to be rebuilt by hand)
 
