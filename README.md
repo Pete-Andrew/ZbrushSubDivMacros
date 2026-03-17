@@ -5,12 +5,12 @@ I built a small set of ZBrush macros for editing subdivision levels across multi
 These macros are useful for workflows where you need to temporarily remove lower subdivision levels from a subtool, especially when inserting IMM brush parts that require the target subtool to have no subdivisions.
 They are mainly intended to help with an IMM + UV preservation workflow in ZBrush.
 
-Included macros:
+Included macros:<br>
 **DelLowerVisibleSubtools** <br>  
 Moves all visible subtools to their highest subdivision level, then deletes all lower subdivision levels.
-**ReconstructVisibleSubtools** <br>  
+**ReconstructVisibleSubtools** <br>
 Reconstructs subdivision levels for all visible subtools.
-**DelLowerAllSubtools** <br>  
+**DelLowerAllSubtools** <br>
 Deletes lower subdivision levels for all subtools, including hidden ones.
 
 **What problem this solves:**
