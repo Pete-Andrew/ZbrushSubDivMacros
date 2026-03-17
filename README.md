@@ -1,34 +1,91 @@
 # ZbrushSubDivMacros
-I've built a few zbrush macros for editing subdivisions over multiple subtools
-These macros are useful for certain process (like adding IMM brush parts which need no subdivs on a subtool to work, see below for my IMM workflow) 
+ZBrush Multi-SubTool Subdivision Macros
 
-The macros
-1. Zbrush macro for deleting all lower subdivisions from visible subtools and leaving the highest state. 
-2. A seperate zbrush macro for then re-creating subdivisions for all visible subtools.
-3. A macro that deletes all lowersubdivisons (including for hidden subtools)
+I built a small set of ZBrush macros for editing subdivision levels across multiple subtools.
+These macros are useful for workflows where you need to temporarily remove lower subdivision levels from a subtool, especially when inserting IMM brush parts that require the target subtool to have no subdivisions.
+They are mainly intended to help with an IMM + UV preservation workflow in ZBrush.
 
-This is my solution to retaining UV's for IMM brushes in Zbrush (which would otherwise all have to be rebuilt by hand)
+Included macros:
+**DelLowerVisibleSubtools**
+Moves all visible subtools to their highest subdivision level, then deletes all lower subdivision levels.
+**ReconstructVisibleSubtools**
+Reconstructs subdivision levels for all visible subtools.
+**DelLowerAllSubtools**
+Deletes lower subdivision levels for all subtools, including hidden ones.
 
-The problem: In order to add an IMM mesh part to a subtool in zbrush the subtool needs to have no subdivisions. The subtool also needs UV's (if you want to retain the IMM's UVs, which I do, to save time UV unwrapping)
+**What problem this solves:**
 
-The Workflow Solution:
+When adding an IMM mesh part to a subtool in ZBrush, the target subtool usually needs to have no subdivision levels.
+If you also want the inserted IMM part to retain its UVs, the target subtool needs to already have UVs. Otherwise the IMM UVs are lost.
 
-1. Firstly create quick and dirty UV's for all subtools (so that IMMs with UV's can be added)
-  > In the subtools menu, select all low
-  > In the Zplugin UV master, Unwrap all (with polygroups and symetry ticked if desired) 
-  > This creates UV's for all subtools
+This creates an awkward workflow:
+the target subtool must have UVs
+the target subtool must not have subdivision levels
+after inserting the IMM, you may want to rebuild the original subdivision structure
 
-2. Use the new 'DelLowerVisibleSubtools' macro to put all the subtools in their highest subdivision and delete all lower subdivs.
-   > you can then add the IMM mesh where ever you choose and 'Split by masked points' in the subtool > split menu, this seperated the new IMM mesh from the part you have attached it to.
-   (which is useful as you can then retain the UVs of the new IMM part and the IMM is then a seperate subtool)
+These macros help automate that process.
 
-3. Once the IMM has been seperated you can then user the 'ReconstructVisibleSubtools' macro
-   > this cycles through every subtool and rebuilds it's subdivisions until it can no longer do so
-   > I have set the reconstruct subdiv limit to 7, as anyone with more than 7 subdivisions per sub tool has a computer so powerful it's probablyt sentient anyway and wouldn't need these macros.
+**Workflow solution**
 
-This process then results in you having IMM as sperate subtools that have retained their UV's, you can also do useful things with an IMM brush such as go into the brush menu > modifiers > projection strenght slider to 100 which conforms the IMM to the underneath shape of the subtool you are adding it to, which is great for straps etc. that you want to conform to a surface.  
+**1. Create UVs for all subtools**
+Create quick UVs for all subtools before inserting IMM parts.
 
-To run in zbrush, these macros need to be placed in the following folder 
-Zbrush/zstartup/Macros/Misc
-They need to be added as .txt documents, zbrush will the load the macro and add the buttons (in the macros tab) on next start up. 
-This works for Zbrush 2024 but may work in other versions. 
+One simple quick and dirty method is:
+In the SubTool menu, select all low subdivision subtools
+In ZPlugin > UV Master, use Unwrap All
+Enable Polygroups and Symmetry if needed
+This gives every target subtool a UV set, which allows inserted IMM parts to retain their UVs.
+
+**2. Delete lower subdivision levels**
+Run the DelLowerVisibleSubtools macro.
+This will:
+move each visible subtool to its highest subdivision level
+delete all lower subdivision levels
+
+**3. Insert the IMM mesh**
+
+Insert the IMM mesh part onto the chosen subtool.
+After placing it, use:
+Tool > SubTool > Split > Split Masked Points
+This separates the new IMM mesh from the original subtool.
+
+This is useful because:
+the new IMM part remains a separate subtool
+the UVs of the inserted IMM are retained
+the original mesh stays easier to manage
+
+**4. Rebuild subdivision levels**
+
+Run the ReconstructVisibleSubtools macro.
+This cycles through each visible subtool and repeatedly uses Reconstruct Subdiv until no more subdivision levels can be rebuilt.
+The current loop limit is set to 7 passes per subtool, which should be more than enough for most practical cases.
+
+**Result**
+
+This workflow gives you:
+inserted IMM parts as separate subtools
+retained UVs on those IMM parts
+restored subdivision levels on the original visible subtools
+
+Extra tip for conforming IMM parts
+For straps, belts, and similar surface details, you can also use:
+Brush > Modifiers > Projection Strength = 100
+This helps the IMM conform more closely to the surface underneath it.
+
+**Installation**
+
+To use these macros in ZBrush:
+Save each macro as a .txt file
+Place the files in:
+ZBrush/ZStartup/Macros/Misc
+
+Restart ZBrush
+ZBrush should load the macros automatically and add them to the Macro menu.
+
+Tested in ZBrush 2024.
+It may also work in other versions, but that has not been fully tested.
+
+**Notes**
+These macros are intended as workflow helpers, not replacements for clean asset prep
+Reconstruct Subdiv depends on topology and may not always succeed on every mesh
+Use on duplicated tools first if you want a safer test pass
