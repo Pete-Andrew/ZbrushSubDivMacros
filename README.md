@@ -1,91 +1,136 @@
-# ZbrushSubDivMacros
-ZBrush Multi-SubTool Subdivision Macros
+# ZBrush Multi-SubTool Subdivision Macros
 
-I built a small set of ZBrush macros for editing subdivision levels across multiple subtools.
-These macros are useful for workflows where you need to temporarily remove lower subdivision levels from a subtool, especially when inserting IMM brush parts that require the target subtool to have no subdivisions.
-They are mainly intended to help with an IMM + UV preservation workflow in ZBrush.
+A small set of ZBrush macros for editing subdivision levels across multiple subtools.
 
-Included macros:<br>
-**DelLowerVisibleSubtools** <br>  
-Moves all visible subtools to their highest subdivision level, then deletes all lower subdivision levels.
-**ReconstructVisibleSubtools** <br>
-Reconstructs subdivision levels for all visible subtools.
-**DelLowerAllSubtools** <br>
-Deletes lower subdivision levels for all subtools, including hidden ones.
+These macros are designed to support workflows where subdivision levels need to be temporarily removed — particularly when inserting **IMM brush parts** that require the target subtool to have no subdivisions.
 
-**What problem this solves:**
+They are especially useful for preserving **UVs when working with IMM brushes**.
 
-When adding an IMM mesh part to a subtool in ZBrush, the target subtool usually needs to have no subdivision levels.
-If you also want the inserted IMM part to retain its UVs, the target subtool needs to already have UVs. Otherwise the IMM UVs are lost.
+---
 
-This creates an awkward workflow:
-the target subtool must have UVs
-the target subtool must not have subdivision levels
-after inserting the IMM, you may want to rebuild the original subdivision structure
+## 📦 Included Macros
 
-These macros help automate that process.
+- **DelLowerVisibleSubtools**  
+  Moves all *visible* subtools to their highest subdivision level, then deletes all lower subdivision levels.
 
-**Workflow solution**
+- **ReconstructVisibleSubtools**  
+  Reconstructs subdivision levels for all *visible* subtools.
 
-**1. Create UVs for all subtools**
-Create quick UVs for all subtools before inserting IMM parts.
+- **DelLowerAllSubtools**  
+  Deletes lower subdivision levels for *all* subtools (including hidden ones).
 
-One simple quick and dirty method is:
-In the SubTool menu, select all low subdivision subtools
-In ZPlugin > UV Master, use Unwrap All
-Enable Polygroups and Symmetry if needed
-This gives every target subtool a UV set, which allows inserted IMM parts to retain their UVs.
+---
 
-**2. Delete lower subdivision levels**
-Run the DelLowerVisibleSubtools macro.
+## ❗ The Problem
+
+When inserting an **IMM mesh part** in ZBrush:
+
+- The target subtool must have **no subdivision levels**
+- The target subtool must already have **UVs** (if you want the IMM UVs to be preserved)
+
+If the target has no UVs, the IMM UVs are lost.  
+If the target has subdivisions, the IMM cannot be inserted.
+
+This creates a frustrating workflow conflict.
+
+---
+
+## ✅ Workflow Solution
+
+### 1. Create UVs for all subtools
+
+Before inserting IMM parts, give all relevant subtools basic UVs.
+
+**Quick method:**
+- Go to **ZPlugin → UV Master**
+- Use **Unwrap All**
+- Enable **Polygroups** and **Symmetry** if needed
+
+This ensures IMM inserts will retain their UVs.
+
+---
+
+### 2. Delete lower subdivision levels
+
+Run:
 This will:
-move each visible subtool to its highest subdivision level
-delete all lower subdivision levels
+- Move each visible subtool to its highest subdivision level
+- Delete all lower subdivision levels
 
-**3. Insert the IMM mesh**
+---
 
-Insert the IMM mesh part onto the chosen subtool.
-After placing it, use:
-Tool > SubTool > Split > Split Masked Points
-This separates the new IMM mesh from the original subtool.
+### 3. Insert IMM mesh
 
-This is useful because:
-the new IMM part remains a separate subtool
-the UVs of the inserted IMM are retained
-the original mesh stays easier to manage
+- Insert your IMM mesh onto the desired subtool
+- Then use:
 
-**4. Rebuild subdivision levels**
 
-Run the ReconstructVisibleSubtools macro.
-This cycles through each visible subtool and repeatedly uses Reconstruct Subdiv until no more subdivision levels can be rebuilt.
-The current loop limit is set to 7 passes per subtool, which should be more than enough for most practical cases.
+This separates the IMM into its own subtool.
 
-**Result**
+**Benefits:**
+- The IMM retains its UVs
+- It becomes a separate, manageable mesh
+- The original mesh remains intact
 
-This workflow gives you:
-inserted IMM parts as separate subtools
-retained UVs on those IMM parts
-restored subdivision levels on the original visible subtools
+---
 
-Extra tip for conforming IMM parts
-For straps, belts, and similar surface details, you can also use:
-Brush > Modifiers > Projection Strength = 100
-This helps the IMM conform more closely to the surface underneath it.
+### 4. Rebuild subdivision levels
 
-**Installation**
+Run:
 
-To use these macros in ZBrush:
-Save each macro as a .txt file
-Place the files in:
-ZBrush/ZStartup/Macros/Misc
+This will:
+- Cycle through visible subtools
+- Rebuild subdivision levels until no more can be reconstructed
 
-Restart ZBrush
-ZBrush should load the macros automatically and add them to the Macro menu.
+The loop is capped at **7 passes per subtool**, which is sufficient for most use cases.
 
-Tested in ZBrush 2024.
-It may also work in other versions, but that has not been fully tested.
+---
 
-**Notes**
-These macros are intended as workflow helpers, not replacements for clean asset prep
-Reconstruct Subdiv depends on topology and may not always succeed on every mesh
-Use on duplicated tools first if you want a safer test pass
+## 🎯 Result
+
+- IMM parts remain as separate subtools  
+- UVs are preserved on inserted IMM meshes  
+- Original subdivision levels are restored  
+
+---
+
+## 💡 Extra Tip
+
+For straps, belts, or surface-conforming details:
+
+This helps the IMM conform to the surface underneath.
+
+---
+
+## ⚙️ Installation
+
+1. Save each macro as a `.txt` file  
+2. Place them in:
+
+3. Restart ZBrush
+
+The macros will appear in the **Macro** menu.
+
+---
+
+## 🧪 Compatibility
+
+- Tested in **ZBrush 2024**
+- May work in other versions, but not fully tested
+
+---
+
+## ⚠️ Notes
+
+- `Reconstruct Subdiv` depends on topology and may not always succeed
+- Use on duplicated tools if you want a safe test pass
+- These macros are workflow helpers, not a replacement for clean topology or UV workflows
+
+---
+
+## 🚀 Future Improvements
+
+- ZPlugin version with a dedicated UI panel
+- Additional batch tools for subtool workflows
+- Expanded automation for game-ready asset prep
+
