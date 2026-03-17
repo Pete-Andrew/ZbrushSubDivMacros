@@ -52,7 +52,7 @@ This ensures IMM inserts will retain their UVs.
 
 ### 2. Delete lower subdivision levels
 
-Run:
+Run: DelLowerVisibleSubtools
 This will:
 - Move each visible subtool to its highest subdivision level
 - Delete all lower subdivision levels
@@ -62,7 +62,7 @@ This will:
 ### 3. Insert IMM mesh
 
 - Insert your IMM mesh onto the desired subtool
-- Then use:
+- Then use: Tool → SubTool → Split → Split Masked Points
 
 
 This separates the IMM into its own subtool.
@@ -76,7 +76,7 @@ This separates the IMM into its own subtool.
 
 ### 4. Rebuild subdivision levels
 
-Run:
+Run:ReconstructVisibleSubtools
 
 This will:
 - Cycle through visible subtools
@@ -97,7 +97,7 @@ The loop is capped at **7 passes per subtool**, which is sufficient for most use
 ## 💡 Extra Tip
 
 For straps, belts, or surface-conforming details:
-
+Brush → Modifiers → Projection Strength = 100
 This helps the IMM conform to the surface underneath.
 
 ---
@@ -105,7 +105,7 @@ This helps the IMM conform to the surface underneath.
 ## ⚙️ Installation
 
 1. Save each macro as a `.txt` file  
-2. Place them in:
+2. Place them in:ZBrush/ZStartup/Macros/Misc
 
 3. Restart ZBrush
 
