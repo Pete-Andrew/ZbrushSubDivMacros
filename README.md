@@ -6,11 +6,11 @@ These macros are useful for workflows where you need to temporarily remove lower
 They are mainly intended to help with an IMM + UV preservation workflow in ZBrush.
 
 Included macros:
-**DelLowerVisibleSubtools**
+**DelLowerVisibleSubtools** <br>  
 Moves all visible subtools to their highest subdivision level, then deletes all lower subdivision levels.
-**ReconstructVisibleSubtools**
+**ReconstructVisibleSubtools** <br>  
 Reconstructs subdivision levels for all visible subtools.
-**DelLowerAllSubtools**
+**DelLowerAllSubtools** <br>  
 Deletes lower subdivision levels for all subtools, including hidden ones.
 
 **What problem this solves:**
