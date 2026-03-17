@@ -1,0 +1,34 @@
+[IButton, "Macro:DelLowerAllSubtools",
+    "For each subtool: go to highest subdivision level, then delete lower subdivision levels.",
+    
+    [VarSet, subCount, [SubToolGetCount]]
+    [VarSet, i, 0]
+
+    [Loop, subCount,
+
+        [SubToolSelect, i]
+        [IUpdate, 1]
+
+        // Only continue if this subtool has subdivision controls available
+        [If, [IExists, "Tool:Geometry:Higher Res"],
+
+            [Loop, 50,
+                [If, [IsEnabled, "Tool:Geometry:Higher Res"],
+                    [IPress, "Tool:Geometry:Higher Res"]
+                    [IUpdate, 1]
+                ,
+                    [LoopExit]
+                ]
+            ]
+
+            [If, [IsEnabled, "Tool:Geometry:Del Lower"],
+                [IPress, "Tool:Geometry:Del Lower"]
+                [IUpdate, 1]
+            ]
+        ]
+
+        [VarInc, i]
+    ]
+
+    [Note, "Finished: all subtools processed.", , 2]
+]

@@ -1,0 +1,35 @@
+[IButton, "Macro:ReconstructVisibleSubtools",
+    "For each VISIBLE subtool: reconstruct lower subdivision levels until no more can be reconstructed.",
+
+    [VarSet, subCount, [SubToolGetCount]]
+    [VarSet, i, 0]
+    [VarSet, processedCount, 0]
+    [VarSet, reconstructedCount, 0]
+
+    [Loop, subCount,
+
+        [If, (([SubToolGetStatus, i] & 0x01) == 0x01),
+
+            [SubToolSelect, i]
+            [IUpdate, 1]
+            [VarInc, processedCount]
+
+            [Loop, 7,
+                [If, [IsEnabled, "Tool:Geometry:Reconstruct Subdiv"],
+                    [IPress, "Tool:Geometry:Reconstruct Subdiv"]
+                    [IUpdate, 1]
+                    [VarInc, reconstructedCount]
+                ,
+                    [LoopExit]
+                ]
+            ]
+        ]
+
+        [VarInc, i]
+    ]
+
+    [Note, [StrMerge,
+        "Finished: processed ", [Val, processedCount],
+        " visible subtools. Reconstruct Subdiv ran ", [Val, reconstructedCount], " time(s)."
+    ], , 3]
+]
