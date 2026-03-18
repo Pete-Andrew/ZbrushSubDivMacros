@@ -97,7 +97,7 @@ The loop is capped at **7 passes per subtool**, which is sufficient for most use
 ## 💡 Extra Tip
 
 For straps, belts, or surface-conforming details:
-Brush → Modifiers → Projection Strength = 100
+Brush → Modifiers → Projection Strength = 100 
 This helps the IMM conform to the surface underneath.
 
 ---
@@ -127,10 +127,3 @@ The macros will appear in the **Macro** menu.
 - These macros are workflow helpers, not a replacement for clean topology or UV workflows
 
 ---
-
-## 🚀 Future Improvements
-
-- ZPlugin version with a dedicated UI panel
-- Additional batch tools for subtool workflows
-- Expanded automation for game-ready asset prep
-
