@@ -104,9 +104,9 @@ This helps the IMM conform to the surface underneath.
 
 ## ⚙️ Installation
 
-1.Place the .txt files and the .zsc files into the following folder:ZBrush/ZStartup/Macros/Misc
-2.Restart ZBrush
-3.Boom! That's it!
+- Place the .txt files and the .zsc files into the following folder:ZBrush/ZStartup/Macros/Misc
+- Restart ZBrush
+- Boom! That's it!
 
 The macros will appear in the **Macro** menu.
 
